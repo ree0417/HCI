@@ -6,9 +6,11 @@
   <title>Register Page</title>
   <link rel="stylesheet" href="Style.css">
 </head>
-<body>
+<body >
     <style>
-         body {
+  
+
+      body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to right, #1e1e20, #b1b1b6);
       margin: 0;
@@ -19,21 +21,24 @@
       min-height: 100vh;
     }
     </style>
-
      <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-brand">
   <a href="index.html">
     <img src="Images/images.jpeg" alt="Logo" class="logo-img">
   </a>
+  <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 </div>
 
-<ul class="nav-links">
+<ul class="nav-links" id="navLinks">
       <li><a href="index.html">Login</a></li>
-      <li><a href="regiter.html" style="background-color: #424245ec;
-      padding: 15px 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);">Register</a></li>
-      <li><a href="home.html">Contact</a></li>
+      <li><a href="register.html" class="active">Register</a></li>
+      <li><a href="forgot.html">Forgot Password</a></li>
     </ul>
   </nav>
 
@@ -51,7 +56,14 @@
     <div id="error" class="error"></div>
   </div>
 
+  
+
   <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("show");
+    }
+
     function register() {
       const Name = document.getElementById("Name").value;
       const Surname = document.getElementById("Surname").value;
@@ -64,6 +76,12 @@
 
       if (ConfirmPassword != CreateNewPassword ) {
         errorDiv.textContent = "Password does not match.";
+        errorDiv.className = "error";
+        return;
+      }
+
+      if (Name==""||Surname==""||StudentNumber==""|| Email==""||ContactNumber==""||ConfirmPassword==""||CreateNewPassword==""){
+        errorDiv.textContent = "Please fill in the empty spaces";
         errorDiv.className = "error";
         return;
       }
