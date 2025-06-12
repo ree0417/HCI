@@ -7,33 +7,24 @@
   <link rel="stylesheet" href="Style.css">
 </head>
 <body>
-    <style>
-         body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #1e1e20, #b1b1b6);
-      margin: 0;
-      padding-top: 80px; /* Leave space for navbar */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-    </style>
 
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-brand">
-  <a href="index.html">
-    <img src="Images/images.jpeg" alt="Logo" class="logo-img">
-  </a>
-</div>
+      <a href="index.html">
+        <img src="Images/images.jpeg" alt="Logo" class="logo-img">
+      </a>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 
-    <ul class="nav-links">
-      <li><a href="index.html" style="background-color: #424245ec;
-      padding: 15px 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);">Login</a></li>
-      <li><a href="regiter.html">Register</a></li>
-      <li><a href="home.html">Contact</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Login</a></li>
+      <li><a href="register.html">Register</a></li>
+      <li><a href="forgot.html">Forgot Password</a></li>
     </ul>
   </nav>
 
@@ -42,14 +33,20 @@
     <h2>Login</h2>
     <input type="text" id="username" placeholder="Username" />
     <input type="password" id="password" placeholder="Password" />
-    <button onclick="login()">Login</button>
     <div id="error" class="error"></div>
-    <a href="regiter.html"><button onclick="register()">Register</button></a>
-    
-    <a href=""><p>Forgot Password</p></a>
+    <a href="home.html"><button onclick="login()">Login</button></a>
+    <button onclick="register()">Register</button>
+    <a href="forgot.html"><p>Forgot Password?</p></a>
   </div>
 
+  
+  <!-- Script -->
   <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("show");
+    }
+
     function login() {
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
@@ -61,7 +58,9 @@
       if (username === storedUsername && password === storedPassword) {
         errorDiv.textContent = "Login successful!";
         errorDiv.className = "success";
-        // Redirect or show dashboard here
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 1000);
       } else {
         errorDiv.textContent = "Invalid username or password.";
         errorDiv.className = "error";
@@ -89,6 +88,5 @@
       document.getElementById("password").value = "";
     }
   </script>
-
 </body>
 </html>
