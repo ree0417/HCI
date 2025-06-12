@@ -1,4 +1,4 @@
- /* Navbar styles */
+  /* Navbar */
     .navbar {
       position: fixed;
       top: 0;
@@ -11,17 +11,33 @@
       padding: 1rem 2rem;
       color: white;
       z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      flex-wrap: wrap;
     }
 
-    .nav-brand {
-      font-size: 1.5rem;
-      font-weight: bold;
+    .nav-brand img.logo-img {
+      height: 40px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      border-radius: 2px;
+      transition: 0.3s;
     }
 
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
       margin: 0;
       padding: 0;
     }
@@ -30,33 +46,140 @@
       color: white;
       text-decoration: none;
       font-weight: 500;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
     }
 
-    .nav-links li a:hover {
-      text-decoration: underline;
+    .nav-links li a:hover,
+    .nav-links li a.active {
+      background-color: #424245ec;
+      color: #ffffff;
     }
 
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #121214;
+        margin-top: 1rem;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links li a {
+        display: block;
+        width: 100%;
+        padding: 0.75rem 1rem;
+      }
+
+      .nav-brand {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+    }
+
+    .error {
+      color: red;
+      margin-bottom: 1rem;
+    }
+
+    .success {
+      color: green;
+      margin-bottom: 1rem;
+    } 
     /* Page styles */
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(white);
+      background: linear-gradient(to right, #1e1e20, #b1b1b6);
       margin: 0;
       padding-top: 80px; /* Leave space for navbar */
       display: flex;
       flex-direction: column;
-      align-items: center;
+      /* align-items: center; */
       min-height: 100vh;
     }
 
+   /* Responsive Login Container Enhancements */
+  .login-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    margin: 2rem auto;
+    box-sizing: border-box;
+  }
+
+  .login-container h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .login-container input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  .login-container button {
+    width: 300px;
+    padding: 0.8rem;
+    background-color: #141615;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s;
+  }
+
+  .login-container button:hover {
+    background-color: #836914;
+  }
+
+  .login-container p {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 480px) {
     .login-container {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      width: 300px;
-      margin-top: 2rem;
+      padding: 1.2rem;
+      margin: 1rem;
     }
 
+    .login-container h2 {
+      font-size: 1.4rem;
+    }
+
+    .login-container input,
+    .login-container button {
+      font-size: 0.95rem;
+      padding: 0.7rem;
+    }
+
+    .login-container p {
+      font-size: 0.9rem;
+    }
+  }
     .register-container {
       background-color: white;
       padding: 2rem;
@@ -64,6 +187,7 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       width: 300px;
       margin-top: 2rem;
+      position: absolute;
     }
 
     h2 {
@@ -155,3 +279,21 @@
 .show {
   display: block;
 }
+
+* {
+    box-sizing: border-box;
+  }
+
+  /* body {
+    margin: 0;
+    padding: 0;
+  } */
+
+  /* Footer */
+    footer {
+      background-color: #060708;
+      color: white;
+      text-align: center;
+      padding: 5px;
+    }
+  
