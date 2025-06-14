@@ -52,6 +52,48 @@
   </nav>
     <h1 style="margin-top: 80px;">Oops!🤦‍♂️ We currently do not have contact information for the sports management office, we'll keep you updated once we have. Danko!!😉</H1>
 
-        
+       <!-- Script -->
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("show");
+    }
+    const dropdownLink = document.getElementById('dropdownLink');
+    const moreDropdown = document.getElementById('moreDropdown');
+    const dropdownWrapper = document.getElementById('dropdownWrapper');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    dropdownLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      dropdownLink.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dropdownWrapper.contains(e.target)) {
+        dropdownLink.classList.remove('active');
+      }
+    });
+
+    
+
+  dropdownLink.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the link from navigating
+    dropdownMenu.classList.toggle('show');
+  });
+
+  // Optional: Click outside to close the dropdown
+  document.addEventListener('click', function(event) {
+    const isClickInside = document.getElementById('dropdownWrapper').contains(event.target);
+    if (!isClickInside) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+
+  </script>
+  
 </body>
 </html>
