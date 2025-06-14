@@ -5,131 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WSU Institution Sports Hub</title>
   <link href="Style.css" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
 
-  <style>
-    /* Reset and basic layout */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8fafc;
-      color: #1a202c;
-    }
-
-    /* Navbar styles */
-    .navbar {
-      background-color: #000000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      color: white;
-    }
-
-    .nav-brand img {
-      height: 50px;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 15px;
-    }
-
-    .nav-links li a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 12px;
-    }
-
-    .nav-links li a:hover {
-      background-color: #2527295f;
-      border-radius: 4px;
-    }
-
-    /* Dropdown styles */
-    .dropdown {
-      display: none;
-      position: absolute;
-      background-color: #222324d9;
-      list-style: none;
-      top: 100%;
-      left: 0;
-      min-width: 150px;
-      z-index: 1000;
-    }
-
-    .dropdown li a {
-      padding: 10px;
-      display: block;
-      color: white;
-    }
-
-    #dropdownWrapper:hover .dropdown {
-      display: block;
-    }
-
-    /* Hamburger menu */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background: white;
-    }
-
-    /* Mobile responsiveness */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: #222324d9;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-
-      #dropdownWrapper {
-        position: relative;
-      }
-
-      #dropdownWrapper .dropdown {
-        position: static;
-        background-color: #0c0c0cf2;
-      }
-
-      #dropdownLink.active + .dropdown {
-        display: block;
-      }
-    }
-
-    
-
-    /* Section background */
-    section {
-      background-color: #f1f5f9;
-      padding: 40px 20px;
-      margin-bottom: 30px;
-    }
-  </style>
+  
 </head>
 
 <body>
@@ -148,7 +26,7 @@
     
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Football</a></li>
+      <li><a href="football.html">Football</a></li>
       <li><a href="index.html">Rugby</a></li>
       <li><a href="index.html">Cricket</a></li>
       <li id="dropdownWrapper" style="position: relative;">
@@ -160,10 +38,23 @@
     <li><a href="#">Netball</a></li>
   </ul>
 </li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="index.html">Logout</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html" id="logoutLink">Logout</a><script>
+  document.getElementById('logoutLink').addEventListener('click', function(event) {
+    event.preventDefault(); // Stop immediate navigation
+    const confirmed = confirm("Are you sure you want to logout?");
+    if (confirmed) {
+      window.location.href = this.href; // Proceed to logout
+    }
+    // If not confirmed, nothing happens
+  });
+</script>
+</li>
+
     </ul>
   </nav>
+  
+
 
   <!-- Welcome Section -->
   <section style="text-align: center;">
@@ -192,7 +83,7 @@
     <div style="text-align: center;">
       <img src="football/default.jpg" alt="WSU Football" style="max-width: 100%;">
     </div>
-    <p style="text-align: center;">Football is one of the most active sports on campus. With dedicated coaches and weekly training sessions,<br> students get the chance to improve their skills and compete in inter-university leagues and tournaments.<br> The football program helps students build endurance, teamwork, and discipline while also having fun.</p>
+    <p style="text-align: center;">Football is one of the most active sports on campus. With dedicated coaches and weekly training sessions,<br> students get the chance to improve their skills and compete in inter-university leagues and tournaments.<br> The football program helps students build endurance, teamwork, and discipline while also having fun. <a href="football.html"> click here</a> to join the club.</p>
   </section>
 
   <section>
@@ -200,7 +91,7 @@
     <div style="text-align: center;">
       <img src="rugby/images (1).jpeg" alt="WSU Rugby" style="max-width: 100%;">
     </div>
-    <p style="text-align: center;">Rugby is for those who enjoy physical challenge and strategic gameplay. It teaches strength,<br> cooperation, and resilience. Our rugby team participates in regular matches and tournaments,<br> and welcomes both experienced players and those new to the sport.</p>
+    <p style="text-align: center;">Rugby is for those who enjoy physical challenge and strategic gameplay. It teaches strength,<br> cooperation, and resilience. Our rugby team participates in regular matches and tournaments,<br> and welcomes both experienced players and those new to the sport. <a href="rugby.html">click here</a> to join the team.</p>
   </section>
 
   <section>
@@ -208,7 +99,7 @@
     <div style="text-align: center;">
       <img src="cricket/images (1).jpeg" alt="WSU Cricket" style="max-width: 100%;">
     </div>
-    <p style="text-align: center;">Cricket is a popular sport that brings together tactical thinking and precision. Whether you're a batsman,<br> bowler, or an all-rounder, you'll find opportunities to compete in friendly matches and varsity leagues.<br> Coaching and practice nets are provided for skill development.</p>
+    <p style="text-align: center;">Cricket is a popular sport that brings together tactical thinking and precision. Whether you're a batsman,<br> bowler, or an all-rounder, you'll find opportunities to compete in friendly matches and varsity leagues.<br> Coaching and practice nets are provided for skill development. <a href="cricket.html">click here</a> to join the team.</p>
   </section>
 
   <section>
@@ -216,7 +107,7 @@
     <div style="text-align: center;">
       <img src="atlhetics/wsu-sports-facilities.jpg" alt="WSU Athletics" style="width: 50%; border-radius: 8px;">
     </div>
-    <p style="text-align: center;">Athletics includes a variety of track and field events, such as sprinting, long-distance running,<br> high jump, and more. It's ideal for students who are goal-oriented and self-motivated.<br> Our athletics program also helps prepare students for regional and national competitions.</p>
+    <p style="text-align: center;">Athletics includes a variety of track and field events, such as sprinting, long-distance running,<br> high jump, and more. It's ideal for students who are goal-oriented and self-motivated.<br> Our athletics program also helps prepare students for regional and national competitions. <a href="athletics.html">click here</a> to join the team.</p>
   </section>
 
   <section>
@@ -224,7 +115,7 @@
     <div style="text-align: center;">
       <img src="basketball/WSU_SHOOTING_GUARD_CHINA-BOUND_AS_PART_OF_USSA_NATIONAL_SQUAD_1.jpg" alt="WSU Basketball" style="width: 50%; border-radius: 8px;">
     </div>
-    <p style="text-align: center;">Basketball is a high-energy, fast-paced game that teaches teamwork, coordination, and<br> decision-making under pressure. Students can join male or female teams<br> and participate in campus leagues, inter-university games, and casual matches.</p>
+    <p style="text-align: center;">Basketball is a high-energy, fast-paced game that teaches teamwork, coordination, and<br> decision-making under pressure. Students can join male or female teams<br> and participate in campus leagues, inter-university games, and casual matches. <a href="basketball.html">click here</a> to join the team.</p>
   </section>
 
   <section>
@@ -232,7 +123,7 @@
     <div style="text-align: center;">
       <img src="vollyball/images.jpeg" alt="WSU Volleyball" style="max-width: 100%; border-radius: 8px;">
     </div>
-    <p style="text-align: center;">Volleyball is one of the fast-growing sports at Walter Sisulu University, bringing together students who<br> value teamwork, agility, and strategy. The sport encourages both competitive<br> and recreational play, allowing students of all skill levels to participate and improve.</p>
+    <p style="text-align: center;">Volleyball is one of the fast-growing sports at Walter Sisulu University, bringing together students who<br> value teamwork, agility, and strategy. The sport encourages both competitive<br> and recreational play, allowing students of all skill levels to participate and improve. <a href="volleyball.html">click here</a> to join the team.</p>
   </section>
 
   <section>
@@ -240,7 +131,7 @@
     <div style="text-align: center;">
       <img src="netball/WSU_NETBALL_BLOWS_COMPETITION_AWAY_AT_USSA_CHAMPS_TO_GAIN_PROMOTION.jpg" alt="WSU Netball" style="width: 50%; border-radius: 8px;">
     </div>
-    <p style="text-align: center;">Netball is especially popular among female students, but open to everyone interested.<br> The sport emphasizes quick reflexes, positioning, <br> and communication. Our netball team competes at different levels and welcomes new players every semester.</p>
+    <p style="text-align: center;">Netball is especially popular among female students, but open to everyone interested.<br> The sport emphasizes quick reflexes, positioning, <br> and communication. Our netball team competes at different levels and welcomes new players every semester. <a href="netball.html">click here</a> to join the team.</p>
   </section>
 
   <!-- Footer -->
@@ -274,6 +165,24 @@
         dropdownLink.classList.remove('active');
       }
     });
+
+    
+
+  dropdownLink.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the link from navigating
+    dropdownMenu.classList.toggle('show');
+  });
+
+  // Optional: Click outside to close the dropdown
+  document.addEventListener('click', function(event) {
+    const isClickInside = document.getElementById('dropdownWrapper').contains(event.target);
+    if (!isClickInside) {
+      dropdownMenu.classList.remove('show');
+    }
+  });
+
   </script>
+
+  
 </body>
 </html>
