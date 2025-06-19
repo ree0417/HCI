@@ -17,23 +17,22 @@
 <body>
 
     <nav class="navbar">
-    <div class="nav-brand">
-      <a href="home.html">
-        <img src="Images/images.jpeg" alt="WSU Logo" class="logo-img">
-      </a>
-      <div class="hamburger" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+  <div class="nav-brand">
+    <a href="contact.html">
+      <img src="Images/images.jpeg" alt="WSU Logo" class="logo-img">
+    </a>
+    <div class="hamburger" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+  </div>
 
-    
-
-    <ul class="nav-links" id="navLinks">
-       <li><a href="football.html">Football</a></li>
+  
+   <ul class="nav-links" id="navLinks">
+     <li><a href="football.html">Football</a></li>
       <li><a href="rugby.html">Rugby</a></li>
-      <li><a href="cricket.html">Upcoming Matches</a></li>
+      <li><a href="upcoming.html">Upcoming Matches</a></li>
       <li id="dropdownWrapper" style="position: relative;">
         <a href="#" id="dropdownLink">More ▾</a>
         <ul class="dropdown" id="moreDropdown">
@@ -44,23 +43,11 @@
           <li><a href="netball.html">Netball</a></li>
         </ul>
       </li>
-  </ul>
-</li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="index.html" id="logoutLink">Logout</a><script>
-  document.getElementById('logoutLink').addEventListener('click', function(event) {
-    event.preventDefault(); // Stop immediate navigation
-    const confirmed = confirm("Are you sure you want to logout?");
-    if (confirmed) {
-      window.location.href = this.href; // Proceed to logout
-    }
-    // If not confirmed, nothing happens
-  });
-</script>
-</li>
-
-    </ul>
-  </nav>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="index.html" id="logoutLink">Logout</a></li>
+  </ul> 
+</nav>
 
 <form>
   <h2>All Blacks Rugby Team Registration</h2>
@@ -164,5 +151,14 @@
     <p>&copy; 2025 Walter Sisulu University Sports Hub. All Rights Reserved.</p>
     <p>Developed to connect students with the Sports Department</p>
   </footer>
+  <script>
+  document.getElementById('logoutLink').addEventListener('click', function (event) {
+    event.preventDefault();
+    const confirmed = confirm("Are you sure you want to logout?");
+    if (confirmed) {
+      window.location.href = this.href;
+    }
+  });
+</script>
 </body>
 </html>
