@@ -144,6 +144,12 @@
     <p>Developed to connect students with the Sports Department</p>
   </footer>
   <script>
+    document.addEventListener('click', function (e) {
+    if (!dropdownWrapper.contains(e.target)) {
+      dropdownWrapper.classList.remove('active');
+    }
+  });
+
   document.getElementById('logoutLink').addEventListener('click', function (event) {
     event.preventDefault();
     const confirmed = confirm("Are you sure you want to logout?");
@@ -151,6 +157,6 @@
       window.location.href = this.href;
     }
   });
-</script>
+  </script>
 </body>
 </html>
