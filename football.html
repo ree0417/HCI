@@ -143,5 +143,14 @@
     <p>&copy; 2025 Walter Sisulu University Sports Hub. All Rights Reserved.</p>
     <p>Developed to connect students with the Sports Department</p>
   </footer>
+  <script>
+  document.getElementById('logoutLink').addEventListener('click', function (event) {
+    event.preventDefault();
+    const confirmed = confirm("Are you sure you want to logout?");
+    if (confirmed) {
+      window.location.href = this.href;
+    }
+  });
+</script>
 </body>
 </html>
