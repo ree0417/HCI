@@ -296,4 +296,6 @@
       text-align: center;
       padding: 5px;
     }
-  
+  .required {
+    color: red;
+    margin-left: 4px;
