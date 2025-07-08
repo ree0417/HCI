@@ -4,97 +4,146 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Register Page</title>
-  <link rel="stylesheet" href="Style.css">
-</head>
-<body >
-    <style>
-  
-
-      body {
+  <link rel="stylesheet" href="Style.css" />
+  <style>
+    body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to right, #1e1e20, #b1b1b6);
       margin: 0;
-      padding-top: 80px; /* Leave space for navbar */
+      padding-top: 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
     }
-    </style>
-     <!-- Navigation Bar -->
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-brand">
-  <a href="index.html">
-    <img src="Images/images.jpeg" alt="Logo" class="logo-img">
-  </a>
-  <div class="hamburger" onclick="toggleMenu()">
+      <a href="index.html">
+        <img src="Images/images.jpeg" alt="Logo" class="logo-img">
+      </a>
+      <div class="hamburger" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
-</div>
-
-<ul class="nav-links" id="navLinks">
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Login</a></li>
       <li><a href="register.html" class="active">Register</a></li>
       <li><a href="forgot.html">Forgot Password</a></li>
     </ul>
   </nav>
 
-  <!-- Login Container -->
+  <!-- Register Container -->
   <div class="register-container">
     <h2>Register</h2>
-    <input type="text" id="Name" placeholder="Name"/>
-    <input type="Surname" id="Surname" placeholder="Surname"/>
-    <input type="Student number" id="Student number" placeholder="Student number"/>
-    <input type="Create New password" id="Create New Password" placeholder="Create New Password"/>
-    <input type="Confirm password" id="Confirm Password" placeholder="Confirm password"/>
-    <input type="Contact Number" id="Contact Number" placeholder="Contact Number"/>
-    <input type="Email" id="Email" placeholder="StudentNo@mywsu.ac.za"/>
+    <input type="text" id="name" placeholder="Name" />
+    <input type="text" id="surname" placeholder="Surname" />
+    <input type="text" id="student_number" placeholder="Student Number" />
+    <input type="password" id="password" placeholder="Create New Password" />
+    <input type="password" id="ConfirmPassword" placeholder="Confirm Password" />
+    <input type="text" id="contact_number" placeholder="Contact Number" />
+    <input type="email" id="Email" placeholder="StudentNo@mywsu.ac.za" />
     <button onclick="register()">Register</button>
     <div id="error" class="error"></div>
   </div>
 
-  
-
+  <!-- ✅ Supabase & Script -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
+    // ✅ Now that Supabase is loaded, we can safely initialize it
+    const supabaseUrl = 'https://ymbxlfdhvoquhnluwval.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltYnhsZmRodm9xdWhubHV3dmFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5NjMwODAsImV4cCI6MjA2NzUzOTA4MH0.OzGSMk-2dmANdE_8F3P_JNqZRpppGN-hL7k_WTnPXfA';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
     function toggleMenu() {
       const navLinks = document.getElementById("navLinks");
       navLinks.classList.toggle("show");
     }
 
-    function register() {
-      const Name = document.getElementById("Name").value;
-      const Surname = document.getElementById("Surname").value;
-      const StudentNumber = document.getElementById("Student number").value;
-      const CreateNewPassword = document.getElementById("Create New Password").value;
-      const ConfirmPassword = document.getElementById("Confirm password").value;
-      const ContactNumber = document.getElementById("Contact Number").value;
-      const Email = document.getElementById("Email").value;
-      const errorDiv = document.getElementById("error");
+    async function register() {
+      const name = document.getElementById("name").value.trim();
+      const surname = document.getElementById("surname").value.trim();
+      const student_number = document.getElementById("student_number").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("ConfirmPassword").value;
+      const contact_number = document.getElementById("contact_number").value.trim();
+      const email = document.getElementById("Email").value.trim();
+      const messageEl = document.getElementById("error");
 
-      if (ConfirmPassword != CreateNewPassword ) {
-        errorDiv.textContent = "Password does not match.";
-        errorDiv.className = "error";
+      if (!name || !surname || !student_number || !email || !password || !confirmPassword || !contact_number) {
+        messageEl.textContent = '❌ Please fill in all required fields.';
+        messageEl.className = 'error';
         return;
       }
 
-      if (Name==""||Surname==""||StudentNumber==""|| Email==""||ContactNumber==""||ConfirmPassword==""||CreateNewPassword==""){
-        errorDiv.textContent = "Please fill in the empty spaces";
-        errorDiv.className = "error";
+      if (password !== confirmPassword) {
+        messageEl.textContent = '❌ Passwords do not match.';
+        messageEl.className = 'error';
         return;
       }
 
-      localStorage.setItem("registeredUsername", username);
-      localStorage.setItem("registeredPassword", password);
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        messageEl.textContent = '❌ Please enter a valid email address.';
+        messageEl.className = 'error';
+        return;
+      }
 
-      errorDiv.textContent = "Registration successful! You can now log in.";
-      errorDiv.className = "success";
+      try {
+        const { data: authData, error: authError } = await supabase.auth.signUp({ email, password });
 
-      document.getElementById("username").value = "";
-      document.getElementById("password").value = "";
+        if (authError) {
+          messageEl.textContent = `❌ Signup error: ${authError.message}`;
+          messageEl.className = 'error';
+          return;
+        }
+
+        const userId = authData.user?.id;
+        if (!userId) {
+          messageEl.textContent = '❌ Failed to get user ID from Supabase.';
+          return;
+        }
+
+        const { error: insertError } = await supabase
+          .from("Users")
+          .insert([{
+            id: userId,
+            name,
+            surname,
+            student_number,
+            contact_number,
+            email,
+          }]);
+
+        if (insertError) {
+          messageEl.textContent = `❌ Error saving user info: ${insertError.message}`;
+          messageEl.className = 'error';
+          return;
+        }
+
+        messageEl.textContent = "✅ Registration successful! Please check your email to confirm your account.";
+        messageEl.className = "success";
+
+        // Clear form
+        document.getElementById("name").value = "";
+        document.getElementById("surname").value = "";
+        document.getElementById("student_number").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("ConfirmPassword").value = "";
+        document.getElementById("contact_number").value = "";
+        document.getElementById("Email").value = "";
+
+      } catch (error) {
+        messageEl.textContent = `❌ Unexpected error: ${error.message}`;
+        messageEl.className = 'error';
+      }
     }
   </script>
-  </body>
+</body>
 </html>
