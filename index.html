@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login Page</title>
   <link rel="stylesheet" href="Style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
 </head>
 <body>
   <style>
@@ -35,7 +37,7 @@
     </div>
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="home.html" class="active">Login</a></li>
+      <li><a href="index.html" class="active">Login</a></li>
       <li><a href="register.html">Register</a></li>
       <li><a href="forgot.html">Forgot Password</a></li>
     </ul>
@@ -47,7 +49,7 @@
     <input type="text" id="username" placeholder="Username" />
     <input type="password" id="password" placeholder="Password" />
     <div id="error" class="error"></div>
-    <a href="home.html"><button onclick="login()">Login</button></a>
+    <button onclick="login()">Login</button>
     <a href="register.html"><button onclick="register()">Register</button></a>
     <a href="forgot.html"><p>Forgot Password?</p></a>
   </div>
@@ -55,7 +57,7 @@
   
   <!-- Script -->
   <script>
-    function toggleMenu() {
+   function toggleMenu() {
       const navLinks = document.getElementById("navLinks");
       navLinks.classList.toggle("show");
     }
@@ -99,6 +101,48 @@
 
       document.getElementById("username").value = "";
       document.getElementById("password").value = "";
+
+      const supabaseUrl = 'https://ymbxlfdhvoquhnluwval.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltYnhsZmRodm9xdWhubHV3dmFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5NjMwODAsImV4cCI6MjA2NzUzOTA4MH0.OzGSMk-2dmANdE_8F3P_JNqZRpppGN-hL7k_WTnPXfA'; // your anon public key
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+  function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.toggle("show");
+  }
+
+  async function login() {
+    const email = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const errorDiv = document.getElementById("error");
+
+    if (!email || !password) {
+      errorDiv.textContent = "❌ Please enter both email and password.";
+      errorDiv.className = "error";
+      return;
+    }
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      errorDiv.textContent = "❌ Login failed: " + error.message;
+      errorDiv.className = "error";
+    } else {
+      errorDiv.textContent = "✅ Login successful!";
+      errorDiv.className = "success";
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1500);
+    }
+  }
+
+  function register() {
+    // Optional: redirect to register page or open register modal
+    window.location.href = "register.html";
+  }
     }
   </script>
 </body>
